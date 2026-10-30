@@ -108,6 +108,25 @@
   .chip i{font-style:normal;font-size:11.5px;font-weight:400;color:var(--muted);letter-spacing:0;}
   @media(max-width:600px){.notice{padding:16px} .notice .nt-t{font-size:14.5px}}
 
+  /* report link */
+  .meta{gap:10px;}
+  .pid{flex:1 1 auto;min-width:0;}
+  .report{flex:0 0 auto;display:inline-flex;align-items:center;gap:4px;
+    font-size:11px;line-height:1.5;color:var(--ink);background:#fff;
+    border:1px solid var(--line2);padding:2px 7px;border-radius:2px;
+    text-decoration:none;white-space:nowrap;letter-spacing:.02em;
+    transition:border-color .15s,background .15s,color .15s;}
+  .report:hover{border-color:var(--ink);background:var(--soft);}
+  .report i{font-style:normal;color:var(--muted);font-size:10px;}
+  .report:hover i{color:var(--ink);}
+
+  .lbreport{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--ink);
+    background:var(--ink);color:#fff;font-size:13px;font-weight:600;padding:5px 13px;
+    border-radius:2px;text-decoration:none;white-space:nowrap;
+    transition:opacity .15s;}
+  .lbreport:hover{opacity:.82;}
+  .lbcount{margin-left:auto;font-size:13px;color:var(--muted);letter-spacing:.04em;}
+
   footer{margin-top:56px;border-top:1px solid var(--ink);padding:22px 0 54px;
     display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
     font-size:12.5px;color:var(--muted);}
@@ -119,7 +138,7 @@
   <p class="eyebrow">商品图集 · 休闲商务风长裤</p>
   <h1>休闲商务风长裤稀缺款</h1>
   <p class="sub">Casual Business Trousers · Scarcity Selection</p>
-  <p class="lead">休闲商务风长裤稀缺款图集，按裤型分为 5 个系列、共 243 款。点击任意图片可放大查看，支持左右翻页与键盘方向键切换，按 Esc 关闭。</p>
+  <p class="lead">休闲商务风长裤稀缺款图集，按裤型分为 5 个系列、共 243 款。点击任意图片可放大查看，支持左右翻页与键盘方向键切换，按 Esc 关闭；每张图片下方的「同款提报」可直接提交同款需求。</p>
   <div class="facts">
     <div><b>243</b><span>商品款数</span></div>
     <div><b>05</b><span>裤型分组</span></div>
@@ -150,6 +169,7 @@
     <span class="lbgroup" id="lbg"></span>
     <span class="lbid" id="lbi"></span>
     <span class="lbcount" id="lbc"></span>
+    <a class="lbreport" id="lbr" href="https://seller.kuajingmaihuo.com/questionnaire?surveyId=206834139170" target="_blank" rel="noopener">同款提报 ↗</a>
     <button class="lbclose" id="lbx">关闭</button>
   </div>
   <div class="lbstage">
@@ -169,6 +189,7 @@ const META = {
   "运动":{en:"Sport", color:"#6B7A2E"},
   "喇叭":{en:"Flared", color:"#7A3E63"}
 };
+const REPORT_URL = 'https://seller.kuajingmaihuo.com/questionnaire?surveyId=206834139170';
 const FLAT = [];
 DATA.forEach((d, gi) => d.items.forEach(it => {
   FLAT.push({file:it.file, pid:it.pid, n:it.n, g:d.g, gi:gi});
@@ -189,7 +210,9 @@ document.getElementById('sections').innerHTML = DATA.map((d,i) => {
       '<div class="shot"><img src="'+it.file+'" alt="'+d.g+' '+it.pid+'"' + (it.n <= 30 ? '' : ' loading="lazy"') + ' decoding="async"></div>' +
       '<figcaption class="meta"><span class="seq" style="color:'+m.color+'">' +
         String(it.n).padStart(3,'0') + '</span>' +
-        '<span class="pid">'+it.pid+'</span></figcaption>' +
+        '<span class="pid">'+it.pid+'</span>' +
+        '<a class="report" href="'+REPORT_URL+'" target="_blank" rel="noopener" title="提报同款">同款提报<i>↗</i></a>' +
+      '</figcaption>' +
     '</figure>'
   ).join('');
   return '<section id="sec-'+i+'">' +
@@ -253,6 +276,7 @@ function closeLB(){
 }
 
 document.addEventListener('click', e => {
+  if (e.target.closest('.report')) return;
   const cell = e.target.closest('.cell');
   if (cell) { openLB(Number(cell.dataset.n)); return; }
 });
