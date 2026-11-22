@@ -133,6 +133,18 @@
   footer{margin-top:56px;border-top:1px solid var(--ink);padding:22px 0 54px;
     display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;
     font-size:12.5px;color:var(--muted);}
+
+  /* disclaimer */
+  .disc{margin-top:64px;padding:26px 28px;border:1px solid var(--line);background:var(--soft);}
+  .disc h3{font-size:15px;font-weight:700;letter-spacing:.06em;margin-bottom:14px;}
+  .disc dl{display:grid;grid-template-columns:auto 1fr;gap:10px 16px;font-size:13px;line-height:1.9;color:var(--ink2);}
+  .disc dt{font-weight:700;color:var(--ink);white-space:nowrap;}
+  .disc dd{margin:0;color:var(--muted);}
+  @media(max-width:600px){
+    .disc{padding:20px 16px;}
+    .disc dl{grid-template-columns:1fr;gap:4px;}
+    .disc dd{margin-bottom:10px;}
+  }
 </style>
 </head>
 <body>
@@ -157,6 +169,22 @@
 
 <div class="wrap" id="sections"></div>
 
+
+<section class="wrap">
+  <div class="disc" id="disc">
+    <h3>免责声明</h3>
+    <dl>
+      <dt>使用范围</dt>
+      <dd>本资料为个人经验分享，仅供内部学习与参考，严禁外传。</dd>
+      <dt>知识产权</dt>
+      <dd>文中涉及的所有商品设计、外观、功能、品牌 Logo 及图案等，其知识产权均归原合法权利人所有，此处仅作行业热款与趋势分析参考，请安全开发款式。</dd>
+      <dt>侵权提示</dt>
+      <dd>请勿直接套用、抄袭相关设计或未经授权使用他人 Logo。如需使用，请自行联系权利人获取授权。若因侵权引发法律纠纷，责任由使用者自行承担。</dd>
+      <dt>免责条款</dt>
+      <dd>本资料仅供方向性参考，编者不对因使用本资料内容所产生的任何后果承担法律责任。</dd>
+    </dl>
+  </div>
+</section>
 <footer class="wrap">
   <span>休闲商务风长裤稀缺款 · 商品图集</span>
   <span>4 个系列 / 324 款</span>
